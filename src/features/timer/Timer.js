@@ -69,9 +69,21 @@ export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
 
       <View style={styles.buttonWrapper}>
         {isStarted ? (
-          <RoundedButton title="| |" onPress={() => setIsStarted(false)} />
+          <RoundedButton
+            isIcon={true}
+            name="pause"
+            iconColor="#FF5420"
+            iconSize={50}
+            onPress={() => setIsStarted(false)}
+          />
         ) : (
-          <RoundedButton title="start" onPress={() => setIsStarted(true)} />
+          <RoundedButton
+            isIcon={true}
+            name="play"
+            iconColor="#14AA90"
+            iconSize={50}
+            onPress={() => setIsStarted(true)}
+          />
         )}
       </View>
       <View style={styles.clearSubject}>
@@ -96,6 +108,8 @@ const styles = StyleSheet.create({
     color: colors.white,
     textAlign: "center",
     fontWeight: "bold",
+    paddingTop: spacing.sm,
+    fontSize: fontSize.lg,
   },
   contdown: {
     flex: 0.5,

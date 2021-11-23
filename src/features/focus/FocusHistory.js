@@ -31,7 +31,10 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
             <View style={styles.clearContainer}>
               <RoundedButton
                 size={85}
-                title="Clear"
+                isIcon={true}
+                name="trash"
+                iconColor="#911"
+                iconSize={40}
                 onPress={() => onClear()}
               />
             </View>
@@ -45,7 +48,8 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
 const styles = StyleSheet.create({
   historyItem: (status) => ({
     color: status > 1 ? "red" : "green",
-    fontSize: fontSize.md,
+    fontSize: fontSize.lg,
+    fontWeight: "bold",
   }),
 
   title: {

@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { fontSize, spacing } from '../utils/sizes';
-import { colors } from '../utils/colors';
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet } from "react-native";
+import { fontSize, spacing } from "../utils/sizes";
+import { colors } from "../utils/colors";
 const minutesToMillis = (min) => min * 1000 * 60;
 const formatTime = (time) => (time < 10 ? `0${time}` : time);
 export const CountDown = ({ minutes = 5, isPaused, onProgress, onEnd }) => {
   const interval = React.useRef(null);
-
+  const [millis, setMillis] = useState(minutesToMillis(minutes));
+  const minute = Math.floor(millis / 1000 / 60) % 60;
+  const seconds = Math.floor(millis / 1000) % 60;
   const countDown = () => {
     setMillis((time) => {
       if (time === 0) {
         clearInterval(interval.current);
-         onEnd();
+
         return;
       }
 
@@ -19,10 +21,9 @@ export const CountDown = ({ minutes = 5, isPaused, onProgress, onEnd }) => {
       return timeLeft;
     });
   };
-
   useEffect(() => {
     onProgress(millis / minutesToMillis(minutes));
-    if(millis === 0) {
+    if (millis === 0) {
       onEnd();
     }
   }, [millis]);
@@ -41,10 +42,6 @@ export const CountDown = ({ minutes = 5, isPaused, onProgress, onEnd }) => {
     setMillis(minutesToMillis(minutes));
   }, [minutes]);
 
-  const [millis, setMillis] = useState(minutesToMillis(minutes));
-  const minute = Math.floor(millis / 1000 / 60) % 60;
-  const seconds = Math.floor(millis / 1000) % 60;
-
   return (
     <Text style={styles.text}>
       {formatTime(minute)} : {formatTime(seconds)}
@@ -55,9 +52,9 @@ export const CountDown = ({ minutes = 5, isPaused, onProgress, onEnd }) => {
 const styles = StyleSheet.create({
   text: {
     fontSize: fontSize.xxxl,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: colors.white,
     padding: spacing.lg,
-    backgroundColor: 'rgba(94,132, 226, 0.3)',
+    backgroundColor: "rgba(94,132, 226, 0.3)",
   },
 });

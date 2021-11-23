@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Platform, AsyncStorage } from "react-native";
 import { Focus } from "./src/features/focus/Focus";
 import { FocusHistory } from "./src/features/focus/FocusHistory";
-import Constants from "expo-constants";
 import { colors } from "./src/utils/colors";
 import { Timer } from "./src/features/timer/Timer";
 import { spacing } from "./src/utils/sizes";
@@ -22,8 +21,6 @@ export default function App() {
       { key: String(focusHistory.length + 1), subject, status },
     ]);
   };
-
-  console.log(focusHistory);
 
   const onClear = () => {
     setFocusHistory([]);
